@@ -13,7 +13,7 @@
                     <th scope="col">Price</th>
                     <th scope="col">Series</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Details</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,16 @@
                         <td>{{ $comic->price }}</td>
                         <td>{{ $comic->series }}</td>
                         <td>{{ $comic->type }}</td>
-                        <td><a href="{{ route('comics.show', $comic->id) }}"><i class="fa-solid fa-eye"></i></a></td>
+                        <td>
+                            <a href="{{ route('comics.show', $comic->id) }}"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('comics.edit', $comic->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="{{ route('comics.destroy', $comic->id) }}" class="d-inline" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
